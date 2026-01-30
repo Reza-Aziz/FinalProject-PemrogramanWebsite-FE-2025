@@ -96,7 +96,7 @@ export const GameOverScreen = ({
             variant="outline"
             className="w-full text-lg h-14 font-semibold border-2 hover:bg-slate-50"
           >
-            <Home className="mr-2 w-5 h-5" /> Back to Home
+            <Home className="mr-2 w-5 h-5" /> Main Menu
           </Button>
         </div>
       </CardContent>

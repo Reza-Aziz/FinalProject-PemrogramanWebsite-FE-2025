@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { GameHeader } from "./components/GameHeader";
@@ -10,9 +9,11 @@ import { findTheMatchService } from "./services/findTheMatch";
 import { shuffleArray } from "./utils";
 import confetti from "canvas-confetti";
 import { Loader2, Volume2, VolumeX } from "lucide-react";
+import { useState, useEffect, useCallback } from "react"; 
 
 const PlayFindTheMatch = () => {
   const { id: gameId } = useParams();
+  const navigate = useNavigate();
 
   const [game, setGame] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -326,7 +327,7 @@ const PlayFindTheMatch = () => {
             gameState.state.usedAnswers.size === gameState.state.totalQuestions
           }
           onRestart={() => window.location.reload()}
-          onBackToHome={() => (window.location.href = "/")}
+          onBackToHome={() => navigate("/")}
         />
       </div>
     );
@@ -336,7 +337,7 @@ const PlayFindTheMatch = () => {
   const unmatchedAnswers = answers.filter((a) => !a.matchedQuestionId);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-300 via-yellow-200 to-orange-200 flex flex-col overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-yellow-300 via-yellow-200 to-orange-200 flex flex-col relative">
       {/* Sound Toggle */}
       <div className="absolute top-4 right-4 z-10">
         <Button
