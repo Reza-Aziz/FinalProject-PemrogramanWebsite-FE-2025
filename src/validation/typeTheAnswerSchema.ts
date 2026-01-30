@@ -18,9 +18,7 @@ export const typeTheAnswerSchema = z.object({
   description: z.string().optional(),
   thumbnail: z.instanceof(File, { message: "Thumbnail image is required" }),
   backgroundImage: z.instanceof(File).optional().nullable(),
-  questions: z
-    .array(typeTheAnswerQuestionSchema)
-    .min(1, "At least one question is required"),
+  questions: z.array(typeTheAnswerQuestionSchema).min(1, "At least one question is required"),
   settings: z.object({
     isPublishImmediately: z.boolean(),
     timeLimitSeconds: z

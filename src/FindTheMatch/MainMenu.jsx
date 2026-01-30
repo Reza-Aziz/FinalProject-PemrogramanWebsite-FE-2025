@@ -14,7 +14,6 @@ const MainMenu = () => {
 
   useEffect(() => {
     const loadedGames = findTheMatchService.getAllGames();
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setGames(loadedGames);
   }, []);
 
@@ -39,20 +38,35 @@ const MainMenu = () => {
             FIND
             <span className="block text-yellow-100 text-5xl md:text-7xl mt-2">THE MATCH</span>
           </h1>
-          <p className="text-white text-xl font-medium drop-shadow-md">Create and play matching games!</p>
+          <p className="text-white text-xl font-medium drop-shadow-md">
+            Create and play matching games!
+          </p>
         </div>
 
         <div className="flex justify-center items-center gap-4 bg-white/20 backdrop-blur-md p-4 rounded-full w-fit mx-auto border border-white/40 shadow-lg">
-          <Label htmlFor="mode-toggle" className={`font-bold text-lg ${!isCreateMode ? "text-white" : "text-white/60"}`}>
+          <Label
+            htmlFor="mode-toggle"
+            className={`font-bold text-lg ${!isCreateMode ? "text-white" : "text-white/60"}`}
+          >
             Play Game
           </Label>
-          <Switch id="mode-toggle" checked={isCreateMode} onCheckedChange={setIsCreateMode} className="data-[state=checked]:bg-orange-500 data-[state=unchecked]:bg-yellow-500 border-2 border-white" />
-          <Label htmlFor="mode-toggle" className={`font-bold text-lg ${isCreateMode ? "text-white" : "text-white/60"}`}>
+          <Switch
+            id="mode-toggle"
+            checked={isCreateMode}
+            onCheckedChange={setIsCreateMode}
+            className="data-[state=checked]:bg-orange-500 data-[state=unchecked]:bg-yellow-500 border-2 border-white"
+          />
+          <Label
+            htmlFor="mode-toggle"
+            className={`font-bold text-lg ${isCreateMode ? "text-white" : "text-white/60"}`}
+          >
             Create Game
           </Label>
         </div>
 
-        <div className={`overflow-hidden transition-all duration-700 ease-in-out ${isCreateMode ? "opacity-100" : "max-h-0 opacity-0"}`}>
+        <div
+          className={`overflow-hidden transition-all duration-700 ease-in-out ${isCreateMode ? "opacity-100" : "max-h-0 opacity-0"}`}
+        >
           <CreateGameForm onCancel={() => setIsCreateMode(false)} onSuccess={handleCreateSuccess} />
         </div>
 
@@ -65,7 +79,9 @@ const MainMenu = () => {
                     <Gamepad2 className="w-8 h-8 text-yellow-500" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-black text-white drop-shadow-sm uppercase">Available Games</h2>
+                    <h2 className="text-2xl font-black text-white drop-shadow-sm uppercase">
+                      Available Games
+                    </h2>
                     <p className="text-white/90 font-medium">{games.length} games ready to play</p>
                   </div>
                 </div>
@@ -78,15 +94,25 @@ const MainMenu = () => {
                           <div className="bg-white rounded-xl p-4 flex gap-4 items-center shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all cursor-pointer border-2 border-transparent hover:border-yellow-400">
                             <div className="w-20 h-20 bg-slate-100 rounded-lg overflow-hidden flex-shrink-0 flex items-center justify-center">
                               {game.thumbnail_image ? (
-                                <img src={game.thumbnail_image} alt={game.name} className="w-full h-full object-cover" />
+                                <img
+                                  src={game.thumbnail_image}
+                                  alt={game.name}
+                                  className="w-full h-full object-cover"
+                                />
                               ) : (
                                 <ImageIcon className="text-slate-300 w-8 h-8 group-hover:text-yellow-500 transition-colors" />
                               )}
                             </div>
                             <div className="flex-1 min-w-0">
-                              <h4 className="font-bold text-slate-800 text-lg truncate">{game.name}</h4>
-                              <p className="text-slate-500 text-sm line-clamp-2">{game.description}</p>
-                              <div className="mt-2 text-xs font-bold text-yellow-600 bg-yellow-100 px-2 py-1 rounded w-fit uppercase">{game.game_json?.items?.length || 0} Pairs</div>
+                              <h4 className="font-bold text-slate-800 text-lg truncate">
+                                {game.name}
+                              </h4>
+                              <p className="text-slate-500 text-sm line-clamp-2">
+                                {game.description}
+                              </p>
+                              <div className="mt-2 text-xs font-bold text-yellow-600 bg-yellow-100 px-2 py-1 rounded w-fit uppercase">
+                                {game.game_json?.items?.length || 0} Pairs
+                              </div>
                             </div>
                             <div className="h-full flex items-center justify-center pl-2">
                               <Play className="text-green-500 fill-green-500 group-hover:scale-110 transition-transform" />
@@ -116,7 +142,11 @@ const MainMenu = () => {
                 ) : (
                   <div className="text-center py-12 bg-white/50 rounded-xl border-dashed border-2 border-white">
                     <p className="text-white font-bold text-lg">No games found.</p>
-                    <Button variant="link" className="text-white underline" onClick={() => setIsCreateMode(true)}>
+                    <Button
+                      variant="link"
+                      className="text-white underline"
+                      onClick={() => setIsCreateMode(true)}
+                    >
                       Create one now!
                     </Button>
                   </div>

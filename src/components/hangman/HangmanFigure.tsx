@@ -33,16 +33,24 @@ export const HangmanFigure: React.FC<HangmanFigureProps> = ({ incorrectGuesses }
         <line x1="130" y1="20" x2="130" y2="50" stroke="currentColor" strokeWidth="4" />
 
         {/* Head */}
-        {incorrectGuesses >= 1 && <circle cx="130" cy="70" r="20" stroke="currentColor" strokeWidth="4" fill="none" />}
+        {incorrectGuesses >= 1 && (
+          <circle cx="130" cy="70" r="20" stroke="currentColor" strokeWidth="4" fill="none" />
+        )}
 
         {/* Body */}
-        {incorrectGuesses >= 2 && <line x1="130" y1="90" x2="130" y2="150" stroke="currentColor" strokeWidth="4" />}
+        {incorrectGuesses >= 2 && (
+          <line x1="130" y1="90" x2="130" y2="150" stroke="currentColor" strokeWidth="4" />
+        )}
 
         {/* Left arm */}
-        {incorrectGuesses >= 3 && <line x1="130" y1="110" x2="100" y2="130" stroke="currentColor" strokeWidth="4" />}
+        {incorrectGuesses >= 3 && (
+          <line x1="130" y1="110" x2="100" y2="130" stroke="currentColor" strokeWidth="4" />
+        )}
 
         {/* Right arm */}
-        {incorrectGuesses >= 4 && <line x1="130" y1="110" x2="160" y2="130" stroke="currentColor" strokeWidth="4" />}
+        {incorrectGuesses >= 4 && (
+          <line x1="130" y1="110" x2="160" y2="130" stroke="currentColor" strokeWidth="4" />
+        )}
 
         {/* Left leg */}
         {incorrectGuesses >= 5 && (
@@ -58,14 +66,19 @@ export const HangmanFigure: React.FC<HangmanFigureProps> = ({ incorrectGuesses }
   return (
     <div className="flex flex-col items-center justify-center gap-4">
       {/* Hangman Figure */}
-      <div className="relative w-full max-w-sm h-64 flex items-center justify-center">{renderHangman()}</div>
+      <div className="relative w-full max-w-sm h-64 flex items-center justify-center">
+        {renderHangman()}
+      </div>
 
       {/* Lives Display with Hearts */}
       <div className="flex items-center gap-2 bg-slate-800/50 px-4 py-2 rounded-lg">
         <span className="text-white font-semibold text-sm mr-2">Lives:</span>
         <div className="flex gap-1">
           {Array.from({ length: MAX_LIVES }).map((_, i) => (
-            <Heart key={i} className={`w-6 h-6 transition-all ${i < livesRemaining ? "fill-red-500 text-red-500 animate-pulse" : "fill-slate-600 text-slate-600 opacity-30"}`} />
+            <Heart
+              key={i}
+              className={`w-6 h-6 transition-all ${i < livesRemaining ? "fill-red-500 text-red-500 animate-pulse" : "fill-slate-600 text-slate-600 opacity-30"}`}
+            />
           ))}
         </div>
         <span className="text-white text-sm font-mono ml-2">

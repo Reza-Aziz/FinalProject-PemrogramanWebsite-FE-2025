@@ -9,7 +9,7 @@ import { findTheMatchService } from "./services/findTheMatch";
 import { shuffleArray } from "./utils";
 import confetti from "canvas-confetti";
 import { Loader2, Volume2, VolumeX } from "lucide-react";
-import { useState, useEffect, useCallback } from "react"; 
+import { useState, useEffect, useCallback } from "react";
 
 const PlayFindTheMatch = () => {
   const { id: gameId } = useParams();
@@ -28,10 +28,10 @@ const PlayFindTheMatch = () => {
   const [shake, setShake] = useState(false);
 
   // Feedback state "Heboh"
-  const [feedback, setFeedback] = useState({ 
-    type: "success", 
-    message: "", 
-    visible: false 
+  const [feedback, setFeedback] = useState({
+    type: "success",
+    message: "",
+    visible: false,
   });
 
   const [isSoundEnabled, setIsSoundEnabled] = useState(true);
@@ -42,7 +42,7 @@ const PlayFindTheMatch = () => {
   const playSound = useCallback(
     (type) => {
       if (!isSoundEnabled) return;
-      const soundFile = type === "win" ? "success" : type; 
+      const soundFile = type === "win" ? "success" : type;
       // Ensure sound path is correct for CRA public folder
       const audio = new Audio(`${process.env.PUBLIC_URL}/sounds/${soundFile}.mp3`);
       audio.play().catch((err) => console.error("Error playing sound:", err));
@@ -78,12 +78,11 @@ const PlayFindTheMatch = () => {
         setAnswers(shuffledAnswers);
         setCurrentQuestionIndex(0);
       } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : "Failed to load game";
+        const errorMessage = err instanceof Error ? err.message : "Failed to load game";
         setError(errorMessage);
         setGameStateError(errorMessage);
       } finally {
-        setTimeout(() => setLoading(false), 2000); 
+        setTimeout(() => setLoading(false), 2000);
       }
     };
 
@@ -100,13 +99,7 @@ const PlayFindTheMatch = () => {
   };
 
   const handleAnswerSelect = async (answerId) => {
-    if (
-      gameState.state.isGameOver ||
-      !game ||
-      feedback.visible ||
-      slideDirection === "out"
-    )
-      return;
+    if (gameState.state.isGameOver || !game || feedback.visible || slideDirection === "out") return;
 
     const selectedAnswer = answers.find((a) => a.id === answerId);
     if (!selectedAnswer || selectedAnswer.matchedQuestionId) return;
@@ -134,7 +127,7 @@ const PlayFindTheMatch = () => {
           particleCount: 50,
           spread: 60,
           origin: { y: 0.7 },
-          colors: ["#facc15", "#fcd34d", "#fbbf24"], 
+          colors: ["#facc15", "#fcd34d", "#fbbf24"],
         });
 
         setFeedback({
@@ -149,9 +142,7 @@ const PlayFindTheMatch = () => {
 
         setAnswers((prev) =>
           prev.map((a) =>
-            a.id === answerId
-              ? { ...a, matchedQuestionId: `question-${currentQuestionIndex}` }
-              : a
+            a.id === answerId ? { ...a, matchedQuestionId: `question-${currentQuestionIndex}` } : a
           )
         );
 
@@ -167,8 +158,7 @@ const PlayFindTheMatch = () => {
             playSound("win");
             const duration = 3000;
             const animationEnd = Date.now() + duration;
-            const randomInRange = (min, max) =>
-              Math.random() * (max - min) + min;
+            const randomInRange = (min, max) => Math.random() * (max - min) + min;
 
             const interval = setInterval(function () {
               const timeLeft = animationEnd - Date.now();
@@ -228,7 +218,7 @@ const PlayFindTheMatch = () => {
         });
 
         const newLives = gameState.state.lives - 1;
-        gameState.handleIncorrectAnswer(); 
+        gameState.handleIncorrectAnswer();
 
         setTimeout(async () => {
           setFeedback((prev) => ({ ...prev, visible: false }));
@@ -237,7 +227,7 @@ const PlayFindTheMatch = () => {
           if (newLives <= 0) {
             gameState.state.isGameOver = true;
           } else {
-            // CHANGE QUESTION ON ERROR 
+            // CHANGE QUESTION ON ERROR
             let nextIndex = currentQuestionIndex + 1;
             if (nextIndex >= gameState.state.items.length) nextIndex = 0;
 
@@ -258,10 +248,7 @@ const PlayFindTheMatch = () => {
     } catch (error) {
       console.error(error);
       setFeedback({ type: "error", message: "⚠️ Error", visible: true });
-      setTimeout(
-        () => setFeedback((prev) => ({ ...prev, visible: false })),
-        2000,
-      );
+      setTimeout(() => setFeedback((prev) => ({ ...prev, visible: false })), 2000);
     }
   };
 
@@ -280,9 +267,7 @@ const PlayFindTheMatch = () => {
             <div className="absolute inset-0 bg-white/20 blur-2xl rounded-full scale-150"></div>
             <h1 className="relative text-6xl md:text-8xl font-black text-white drop-shadow-[0_5px_5px_rgba(0,0,0,0.3)] tracking-tighter transform -rotate-2">
               FIND
-              <span className="block text-4xl md:text-6xl text-yellow-200 mt-2">
-                THE MATCH
-              </span>
+              <span className="block text-4xl md:text-6xl text-yellow-200 mt-2">THE MATCH</span>
             </h1>
           </div>
 
@@ -302,12 +287,8 @@ const PlayFindTheMatch = () => {
       <div className="min-h-screen flex items-center justify-center bg-yellow-50 p-4">
         <div className="max-w-md w-full bg-white shadow-lg rounded-xl p-8 text-center border-2 border-yellow-200">
           <div className="text-5xl mb-4">😿</div>
-          <h2 className="text-2xl font-bold text-yellow-600 mb-2">
-            Oops! Something went wrong
-          </h2>
-          <p className="text-gray-600 mb-6">
-            {error || "Failed to load game."}
-          </p>
+          <h2 className="text-2xl font-bold text-yellow-600 mb-2">Oops! Something went wrong</h2>
+          <p className="text-gray-600 mb-6">{error || "Failed to load game."}</p>
           <Button onClick={() => window.location.reload()} variant="outline">
             Try Again
           </Button>
@@ -338,7 +319,6 @@ const PlayFindTheMatch = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-300 via-yellow-200 to-orange-200 flex flex-col relative">
-
       <div className="absolute top-4 right-4 z-10">
         <Button
           variant="ghost"
@@ -346,11 +326,7 @@ const PlayFindTheMatch = () => {
           onClick={() => setIsSoundEnabled(!isSoundEnabled)}
           className="rounded-full bg-white/50 backdrop-blur hover:bg-white/80 text-yellow-800"
         >
-          {isSoundEnabled ? (
-            <Volume2 className="h-5 w-5" />
-          ) : (
-            <VolumeX className="h-5 w-5" />
-          )}
+          {isSoundEnabled ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
         </Button>
       </div>
 
@@ -364,11 +340,7 @@ const PlayFindTheMatch = () => {
         />
 
         {/* Dramatic Feedback Overlay */}
-        <Feedback
-          type={feedback.type}
-          message={feedback.message}
-          visible={feedback.visible}
-        />
+        <Feedback type={feedback.type} message={feedback.message} visible={feedback.visible} />
 
         <div className="flex-1 flex flex-col justify-center gap-8">
           {/* Current Question Card with Animations */}

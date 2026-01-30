@@ -63,14 +63,11 @@ function gameReducer(state, action) {
     case "NEXT_QUESTION": {
       const nextIndex = state.currentQuestionIndex + 1;
       const isGameOver =
-        nextIndex >= state.items.length ||
-        state.usedAnswers.size === state.items.length;
+        nextIndex >= state.items.length || state.usedAnswers.size === state.items.length;
 
       return {
         ...state,
-        currentQuestionIndex: isGameOver
-          ? state.currentQuestionIndex
-          : nextIndex,
+        currentQuestionIndex: isGameOver ? state.currentQuestionIndex : nextIndex,
         isGameOver,
       };
     }

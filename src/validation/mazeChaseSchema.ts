@@ -13,7 +13,7 @@ export const mazeChaseQuestionSchema = z.object({
     .max(4, "Each question can have at most 4 answers")
     .refine(
       (answers) => answers.some((a) => a.isCorrect),
-      "At least one answer must be correct on each question",
+      "At least one answer must be correct on each question"
     ),
 });
 

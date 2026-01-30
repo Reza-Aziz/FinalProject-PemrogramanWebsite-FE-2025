@@ -9,19 +9,17 @@ export const speedSortingCategorySchema = z
       .max(50, "Category name must be less than 50 characters")
       .regex(
         /^[a-zA-Z0-9\s\-_]+$/,
-        "Category name can only contain letters, numbers, spaces, hyphens, and underscores",
-      ),
+        "Category name can only contain letters, numbers, spaces, hyphens, and underscores"
+      )
   )
   .min(1, "At least one category is required")
   .max(5, "No more than five categories are allowed")
   .refine(
     (categories) => {
-      const uniqueCategories = new Set(
-        categories.map((cat) => cat.toLowerCase()),
-      );
+      const uniqueCategories = new Set(categories.map((cat) => cat.toLowerCase()));
       return uniqueCategories.size === categories.length;
     },
-    { message: "Categories must be unique" },
+    { message: "Categories must be unique" }
   );
 
 const textWordSchema = z.object({
@@ -42,10 +40,7 @@ const imageWordSchema = z.object({
   existingImageUrl: z.string().optional(),
 });
 
-const wordSchema = z.discriminatedUnion("type", [
-  textWordSchema,
-  imageWordSchema,
-]);
+const wordSchema = z.discriminatedUnion("type", [textWordSchema, imageWordSchema]);
 
 export const speedSortingSchema = z.object({
   title: z
@@ -53,10 +48,7 @@ export const speedSortingSchema = z.object({
     .min(1, "Title is required")
     .min(3, "Title must be at least 3 characters")
     .max(100, "Title must be less than 100 characters"),
-  description: z
-    .string()
-    .max(500, "Description must be less than 500 characters")
-    .optional(),
+  description: z.string().max(500, "Description must be less than 500 characters").optional(),
   thumbnail: z
     .union([
       z.instanceof(File, { message: "Thumbnail is required" }),

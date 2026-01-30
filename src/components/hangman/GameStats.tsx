@@ -15,7 +15,14 @@ const formatTime = (seconds: number): string => {
   return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
 };
 
-export const GameStats: React.FC<GameStatsProps> = ({ questionNumber, totalQuestions, score, timeElapsed, incorrectGuesses, maxLives }) => {
+export const GameStats: React.FC<GameStatsProps> = ({
+  questionNumber,
+  totalQuestions,
+  score,
+  timeElapsed,
+  incorrectGuesses,
+  maxLives,
+}) => {
   const livesRemaining = maxLives - incorrectGuesses;
 
   return (

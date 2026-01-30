@@ -39,19 +39,18 @@ export const mockTypeTheAnswerGame = {
 
 // Function to check answers (mock backend logic)
 export const mockCheckAnswers = (
-  userAnswers: { question_index: number; user_answer: string }[],
+  userAnswers: { question_index: number; user_answer: string }[]
 ) => {
   let correctCount = 0;
 
   userAnswers.forEach((userAns) => {
     const question = mockTypeTheAnswerGame.questions.find(
-      (q) => q.question_index === userAns.question_index,
+      (q) => q.question_index === userAns.question_index
     );
 
     if (
       question &&
-      userAns.user_answer.toLowerCase().trim() ===
-        question.correct_answer.toLowerCase().trim()
+      userAns.user_answer.toLowerCase().trim() === question.correct_answer.toLowerCase().trim()
     ) {
       correctCount++;
     }

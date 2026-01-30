@@ -16,9 +16,7 @@ export function FormField({
       <Label className="flex items-center gap-1">
         {label}
         {required && <span className="text-red-500">*</span>}
-        {!required && optionalLabel && (
-          <span className="text-gray-500 text-xs">(optional)</span>
-        )}
+        {!required && optionalLabel && <span className="text-gray-500 text-xs">(optional)</span>}
       </Label>
 
       {children ? (
@@ -27,11 +25,7 @@ export function FormField({
           {error && <p className="text-sm text-red-500">{error}</p>}
         </>
       ) : (
-        <Input
-          className={className ?? "bg-[#F3F3F5]"}
-          required={required}
-          {...props}
-        />
+        <Input className={className ?? "bg-[#F3F3F5]"} required={required} {...props} />
       )}
     </div>
   );

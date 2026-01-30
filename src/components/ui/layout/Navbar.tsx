@@ -47,10 +47,7 @@ export default function Navbar() {
                 </a>
               </Button>
 
-              <Button
-                variant={isMyProjectsPage ? "secondary" : "ghost"}
-                asChild
-              >
+              <Button variant={isMyProjectsPage ? "secondary" : "ghost"} asChild>
                 <a href="/my-projects" className="flex items-center gap-2">
                   <FolderKanban />
                   <span>My Projects</span>
@@ -90,14 +87,10 @@ function ProfileDropdown({ user }: { user: AuthUser | null }) {
               }
               alt="User Avatar"
             />
-            <AvatarFallback>
-              {user?.username?.charAt(0)?.toUpperCase() ?? "U"}
-            </AvatarFallback>
+            <AvatarFallback>{user?.username?.charAt(0)?.toUpperCase() ?? "U"}</AvatarFallback>
           </Avatar>
 
-          <span className="text-sm font-medium text-slate-900">
-            {user?.username ?? "User"}
-          </span>
+          <span className="text-sm font-medium text-slate-900">{user?.username ?? "User"}</span>
         </div>
       </DropdownMenuTrigger>
 

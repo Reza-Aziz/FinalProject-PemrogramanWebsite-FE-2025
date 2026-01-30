@@ -8,7 +8,17 @@ import Dropzone from "@/components/ui/dropzone";
 import { Typography } from "@/components/ui/typography";
 import { Plus, Trash2, X, EyeIcon } from "lucide-react";
 import { findTheMatchService } from "../services/findTheMatch";
-import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel } from "@/components/ui/alert-dialog";
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from "@/components/ui/alert-dialog";
 
 export const CreateGameForm = ({ onCancel, onSuccess }) => {
   const [formErrors, setFormErrors] = useState({});
@@ -123,14 +133,34 @@ export const CreateGameForm = ({ onCancel, onSuccess }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-6">
           <div className="bg-slate-50 p-6 rounded-xl border space-y-4">
-            <FormField required label="Game Title" placeholder="Title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+            <FormField
+              required
+              label="Game Title"
+              placeholder="Title"
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
             {formErrors["title"] && <p className="text-sm text-red-500">{formErrors["title"]}</p>}
 
-            <TextareaField label="Description" placeholder="Describe your game" rows={3} value={description} onChange={(e) => setDescription(e.target.value)} />
+            <TextareaField
+              label="Description"
+              placeholder="Describe your game"
+              rows={3}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
 
             <div>
-              <Dropzone label="Thumbnail Image (Max 2MB)" allowedTypes={["image/png", "image/jpeg"]} maxSize={2 * 1024 * 1024} onChange={(file) => setThumbnail(file)} />
-              {formErrors["thumbnail"] && <p className="text-sm text-red-500">{formErrors["thumbnail"]}</p>}
+              <Dropzone
+                label="Thumbnail Image (Max 2MB)"
+                allowedTypes={["image/png", "image/jpeg"]}
+                maxSize={2 * 1024 * 1024}
+                onChange={(file) => setThumbnail(file)}
+              />
+              {formErrors["thumbnail"] && (
+                <p className="text-sm text-red-500">{formErrors["thumbnail"]}</p>
+              )}
             </div>
           </div>
 
@@ -167,7 +197,9 @@ export const CreateGameForm = ({ onCancel, onSuccess }) => {
             {pairs.map((pair, index) => (
               <div key={index} className="bg-slate-50 p-4 space-y-4 rounded-xl border relative">
                 <div className="flex justify-between items-center">
-                  <span className="text-xs font-bold text-slate-400 uppercase">Pair {index + 1}</span>
+                  <span className="text-xs font-bold text-slate-400 uppercase">
+                    Pair {index + 1}
+                  </span>
                   <Trash2
                     size={16}
                     className={`${pairs.length === 1 ? "text-gray-300 cursor-not-allowed" : "text-red-500 cursor-pointer hover:bg-red-50 rounded"}`}
@@ -178,10 +210,20 @@ export const CreateGameForm = ({ onCancel, onSuccess }) => {
                 </div>
                 <div className="grid grid-cols-1 gap-3">
                   <div>
-                    <Input className="bg-white" placeholder="Question / Item" value={pair.question} onChange={(e) => handlePairChange(index, "question", e.target.value)} />
+                    <Input
+                      className="bg-white"
+                      placeholder="Question / Item"
+                      value={pair.question}
+                      onChange={(e) => handlePairChange(index, "question", e.target.value)}
+                    />
                   </div>
                   <div>
-                    <Input className="bg-white" placeholder="Answer / Match" value={pair.answer} onChange={(e) => handlePairChange(index, "answer", e.target.value)} />
+                    <Input
+                      className="bg-white"
+                      placeholder="Answer / Match"
+                      value={pair.answer}
+                      onChange={(e) => handlePairChange(index, "answer", e.target.value)}
+                    />
                   </div>
                 </div>
               </div>
@@ -200,7 +242,9 @@ export const CreateGameForm = ({ onCancel, onSuccess }) => {
           <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>Discard Changes?</AlertDialogTitle>
-              <AlertDialogDescription>Are you sure you want to cancel? All unsaved changes will be lost.</AlertDialogDescription>
+              <AlertDialogDescription>
+                Are you sure you want to cancel? All unsaved changes will be lost.
+              </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Keep Editing</AlertDialogCancel>
@@ -216,7 +260,12 @@ export const CreateGameForm = ({ onCancel, onSuccess }) => {
             >
               <SaveIcon className="w-4 h-4 mr-2" /> Save Draft
             </Button> */}
-        <Button disabled={pairs.length < 3} size="sm" className="bg-slate-900 text-white hover:bg-black" onClick={() => handleSubmit(true)}>
+        <Button
+          disabled={pairs.length < 3}
+          size="sm"
+          className="bg-slate-900 text-white hover:bg-black"
+          onClick={() => handleSubmit(true)}
+        >
           <EyeIcon className="w-4 h-4 mr-2" /> Publish
         </Button>
       </div>

@@ -1,11 +1,7 @@
 import React from "react";
 import { CheckCircle2, XCircle, Zap } from "lucide-react";
 
-export const Feedback = ({
-  type,
-  message,
-  visible,
-}) => {
+export const Feedback = ({ type, message, visible }) => {
   if (!visible) return null;
 
   const config = {

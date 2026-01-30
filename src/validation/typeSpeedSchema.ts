@@ -15,25 +15,15 @@ export const typeSpeedSchema = z.object({
     .min(1, "Title is required")
     .max(128, "Title must be at most 128 characters")
     .trim(),
-  description: z
-    .string()
-    .max(256, "Description must be at most 256 characters")
-    .trim()
-    .optional(),
+  description: z.string().max(256, "Description must be at most 256 characters").trim().optional(),
   thumbnail: z
     .instanceof(File, { message: "Thumbnail is required" })
     .refine((file) => file.size <= 5 * 1024 * 1024, {
       message: "Thumbnail must be less than 5MB",
     })
-    .refine(
-      (file) =>
-        ["image/jpeg", "image/jpg", "image/png", "image/webp"].includes(
-          file.type,
-        ),
-      {
-        message: "Only .jpg, .jpeg, .png and .webp formats are supported",
-      },
-    ),
+    .refine((file) => ["image/jpeg", "image/jpg", "image/png", "image/webp"].includes(file.type), {
+      message: "Only .jpg, .jpeg, .png and .webp formats are supported",
+    }),
   timeLimit: z
     .number()
     .min(30, "Time limit must be at least 30 seconds")

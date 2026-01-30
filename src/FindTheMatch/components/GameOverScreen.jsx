@@ -4,15 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Trophy, Home, RotateCcw, Frown } from "lucide-react";
 import confetti from "canvas-confetti";
 
-export const GameOverScreen = ({
-  score,
-  totalQuestions,
-  isWin,
-  onRestart,
-  onBackToHome,
-}) => {
-  const percentage =
-    totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
+export const GameOverScreen = ({ score, totalQuestions, isWin, onRestart, onBackToHome }) => {
+  const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
 
   useEffect(() => {
     if (isWin) {
@@ -68,14 +61,10 @@ export const GameOverScreen = ({
 
       <CardContent className="space-y-8 px-8 pb-8">
         <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 flex flex-col items-center gap-1">
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">
-            Final Score
-          </p>
+          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Final Score</p>
           <div className="flex items-baseline gap-1">
             <span className="text-5xl font-black text-slate-800">{score}</span>
-            <span className="text-lg font-bold text-slate-400">
-              / {totalQuestions}
-            </span>
+            <span className="text-lg font-bold text-slate-400">/ {totalQuestions}</span>
           </div>
           <div
             className={`text-sm font-bold px-3 py-1 rounded-full mt-2 ${isWin ? "bg-green-100 text-green-700" : "bg-orange-100 text-orange-700"}`}

@@ -16,9 +16,7 @@ export default function Dropzone({
   onChange,
   defaultValue = null,
 }) {
-  const [file, setFile] = useState(
-    defaultValue instanceof File ? defaultValue : null
-  );
+  const [file, setFile] = useState(defaultValue instanceof File ? defaultValue : null);
 
   const [preview, setPreview] = useState(
     typeof defaultValue === "string"
@@ -129,11 +127,7 @@ export default function Dropzone({
               className="size-16 rounded-md overflow-hidden cursor-pointer"
               onClick={() => setLightboxOpen(true)}
             >
-              <img
-                src={preview}
-                alt="Preview"
-                className="w-full h-full object-cover"
-              />
+              <img src={preview} alt="Preview" className="w-full h-full object-cover" />
             </div>
 
             <div className="flex-1 text-sm truncate">{preview}</div>
@@ -146,19 +140,12 @@ export default function Dropzone({
 
         {preview && file && (
           <FileUpload.List className="mt-2">
-            <FileUpload.Item
-              value={file}
-              className="flex items-center gap-3 p-2 border rounded-md"
-            >
+            <FileUpload.Item value={file} className="flex items-center gap-3 p-2 border rounded-md">
               <FileUpload.ItemPreview
                 className="size-16 rounded-md overflow-hidden cursor-pointer"
                 onClick={() => setLightboxOpen(true)}
               >
-                <img
-                  src={preview}
-                  alt="Preview"
-                  className="w-full h-full object-cover"
-                />
+                <img src={preview} alt="Preview" className="w-full h-full object-cover" />
               </FileUpload.ItemPreview>
 
               <div className="flex-1 text-sm truncate">{file?.name}</div>

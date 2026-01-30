@@ -1,5 +1,5 @@
-import * as React from "react"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
 const Switch = React.forwardRef(({ className, checked, onCheckedChange, ...props }, ref) => {
   return (
@@ -23,8 +23,8 @@ const Switch = React.forwardRef(({ className, checked, onCheckedChange, ...props
         )}
       />
     </button>
-  )
-})
-Switch.displayName = "Switch"
+  );
+});
+Switch.displayName = "Switch";
 
-export { Switch }
+export { Switch };

@@ -10,7 +10,17 @@ import Dropzone from "@/components/ui/dropzone";
 import { Typography } from "@/components/ui/typography";
 import { ArrowLeft, Plus, SaveIcon, Trash2, X, EyeIcon } from "lucide-react";
 import { findTheMatchService } from "./services/findTheMatch";
-import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel } from "@/components/ui/alert-dialog";
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from "@/components/ui/alert-dialog";
 
 function EditFindTheMatch() {
   const navigate = useNavigate();
@@ -172,13 +182,35 @@ function EditFindTheMatch() {
           </div>
           <div className="bg-white w-full h-full p-6 space-y-6 rounded-xl border">
             <div>
-              <FormField required label="Game Title" placeholder="Title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+              <FormField
+                required
+                label="Game Title"
+                placeholder="Title"
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
               {formErrors["title"] && <p className="text-sm text-red-500">{formErrors["title"]}</p>}
             </div>
-            <TextareaField label="Description" placeholder="Describe your game" rows={4} value={description} onChange={(e) => setDescription(e.target.value)} />
+            <TextareaField
+              label="Description"
+              placeholder="Describe your game"
+              rows={4}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
             <div>
-              <Dropzone required label="Thumbnail Image" defaultValue={thumbnailPreview} allowedTypes={["image/png", "image/jpeg"]} maxSize={2 * 1024 * 1024} onChange={(file) => setThumbnail(file)} />
-              {formErrors["thumbnail"] && <p className="text-sm text-red-500">{formErrors["thumbnail"]}</p>}
+              <Dropzone
+                required
+                label="Thumbnail Image"
+                defaultValue={thumbnailPreview}
+                allowedTypes={["image/png", "image/jpeg"]}
+                maxSize={2 * 1024 * 1024}
+                onChange={(file) => setThumbnail(file)}
+              />
+              {formErrors["thumbnail"] && (
+                <p className="text-sm text-red-500">{formErrors["thumbnail"]}</p>
+              )}
             </div>
           </div>
 
@@ -207,11 +239,19 @@ function EditFindTheMatch() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label>Detailed/Question</Label>
-                    <Input placeholder="e.g. Capital of France" value={pair.question} onChange={(e) => handlePairChange(index, "question", e.target.value)} />
+                    <Input
+                      placeholder="e.g. Capital of France"
+                      value={pair.question}
+                      onChange={(e) => handlePairChange(index, "question", e.target.value)}
+                    />
                   </div>
                   <div className="space-y-2">
                     <Label>Match/Answer</Label>
-                    <Input placeholder="e.g. Paris" value={pair.answer} onChange={(e) => handlePairChange(index, "answer", e.target.value)} />
+                    <Input
+                      placeholder="e.g. Paris"
+                      value={pair.answer}
+                      onChange={(e) => handlePairChange(index, "answer", e.target.value)}
+                    />
                   </div>
                 </div>
               </div>
@@ -246,7 +286,9 @@ function EditFindTheMatch() {
               <AlertDialogContent>
                 <AlertDialogHeader>
                   <AlertDialogTitle>Discard Changes?</AlertDialogTitle>
-                  <AlertDialogDescription>Are you sure you want to cancel? All unsaved changes will be lost.</AlertDialogDescription>
+                  <AlertDialogDescription>
+                    Are you sure you want to cancel? All unsaved changes will be lost.
+                  </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Keep Editing</AlertDialogCancel>
@@ -258,7 +300,13 @@ function EditFindTheMatch() {
             <Button size="sm" variant="outline" onClick={() => handleSubmit(false)}>
               <SaveIcon /> Save
             </Button>
-            <Button disabled={pairs.length < 3} size="sm" variant="outline" className="bg-black text-white" onClick={() => handleSubmit(true)}>
+            <Button
+              disabled={pairs.length < 3}
+              size="sm"
+              variant="outline"
+              className="bg-black text-white"
+              onClick={() => handleSubmit(true)}
+            >
               <EyeIcon /> Publish
             </Button>
           </div>

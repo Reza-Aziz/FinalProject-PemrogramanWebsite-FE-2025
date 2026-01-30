@@ -13,7 +13,11 @@ interface ShowAnswersModalProps {
   onClose: () => void;
 }
 
-export const ShowAnswersModal: React.FC<ShowAnswersModalProps> = ({ isOpen, completedQuestions, onClose }) => {
+export const ShowAnswersModal: React.FC<ShowAnswersModalProps> = ({
+  isOpen,
+  completedQuestions,
+  onClose,
+}) => {
   if (!isOpen) return null;
 
   return (
@@ -31,22 +35,39 @@ export const ShowAnswersModal: React.FC<ShowAnswersModalProps> = ({ isOpen, comp
         <div className="overflow-y-auto flex-1">
           <div className="p-6 space-y-4">
             {completedQuestions.map((item, index) => (
-              <div key={index} className={`rounded-lg p-4 border-l-4 ${item.isCorrect ? "bg-green-900 bg-opacity-30 border-green-500" : "bg-red-900 bg-opacity-30 border-red-500"}`}>
+              <div
+                key={index}
+                className={`rounded-lg p-4 border-l-4 ${item.isCorrect ? "bg-green-900 bg-opacity-30 border-green-500" : "bg-red-900 bg-opacity-30 border-red-500"}`}
+              >
                 <div className="text-slate-300 text-sm mb-2">Question {index + 1}</div>
                 <div className="text-white font-semibold mb-3">{item.question}</div>
 
                 <div className="space-y-2 text-sm">
                   <div>
                     <span className="text-slate-400">Correct Answer: </span>
-                    <span className={`font-mono font-bold ${item.isCorrect ? "text-green-400" : "text-slate-500"}`}>{item.isCorrect ? item.answer : "●●●●●●●●"}</span>
+                    <span
+                      className={`font-mono font-bold ${item.isCorrect ? "text-green-400" : "text-slate-500"}`}
+                    >
+                      {item.isCorrect ? item.answer : "●●●●●●●●"}
+                    </span>
                   </div>
                   <div>
                     <span className="text-slate-400">Your Answer: </span>
-                    <span className={`font-mono font-bold ${item.isCorrect ? "text-green-400" : "text-red-400"}`}>{item.playerAnswer || "Not completed"}</span>
+                    <span
+                      className={`font-mono font-bold ${item.isCorrect ? "text-green-400" : "text-red-400"}`}
+                    >
+                      {item.playerAnswer || "Not completed"}
+                    </span>
                   </div>
                 </div>
 
-                <div className="mt-2 text-xs">{item.isCorrect ? <span className="text-green-400">✓ Correct</span> : <span className="text-red-400">✗ Incorrect</span>}</div>
+                <div className="mt-2 text-xs">
+                  {item.isCorrect ? (
+                    <span className="text-green-400">✓ Correct</span>
+                  ) : (
+                    <span className="text-red-400">✗ Incorrect</span>
+                  )}
+                </div>
               </div>
             ))}
           </div>
