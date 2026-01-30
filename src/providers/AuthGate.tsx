@@ -1,5 +1,5 @@
+import React, { useEffect, useState } from "react";
 import { useAuthStore } from "@/store/useAuthStore";
-import { useEffect, useState } from "react";
 import api from "@/api/axios";
 
 export default function AuthGate({ children }: { children: React.ReactNode }) {
@@ -7,24 +7,35 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      setLoading(false);
-      return;
-    }
+    let isMounted = true;
 
-    setToken(token);
+    const initializeAuth = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        if (isMounted) setLoading(false);
+        return;
+      }
 
-    api
-      .get("/api/auth/me")
-      .then((res) => {
-        setUser(res.data.data); // sesuaikan struktur backend
-      })
-      .catch(() => {
+      setToken(token);
+
+      try {
+        const res = await api.get("/api/auth/me");
+        if (isMounted) {
+          setUser(res.data.data);
+        }
+      } catch {
         logout();
-      })
-      .finally(() => setLoading(false));
-  }, []);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    };
+
+    initializeAuth();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [setToken, setUser, logout]);
 
   if (loading) {
     return (
