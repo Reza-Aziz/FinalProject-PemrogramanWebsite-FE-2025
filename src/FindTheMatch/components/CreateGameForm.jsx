@@ -51,7 +51,7 @@ export const CreateGameForm = ({ onCancel, onSuccess }) => {
     setPairs(newPairs);
   };
 
-  // Helper to convert file to base64
+
   const fileToBase64 = (file) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -87,7 +87,7 @@ export const CreateGameForm = ({ onCancel, onSuccess }) => {
         }
       }
 
-      // Create Game Object for LocalStorage
+
       const newGame = {
         id: crypto.randomUUID(),
         name: title,
@@ -134,7 +134,7 @@ export const CreateGameForm = ({ onCancel, onSuccess }) => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-             {/* Left Column: Metadata */}
+
               <div className="space-y-6">
                  <div className="bg-slate-50 p-6 rounded-xl border space-y-4">
                     <FormField
@@ -189,7 +189,7 @@ export const CreateGameForm = ({ onCancel, onSuccess }) => {
                 </div>
               </div>
 
-              {/* Right Column: Pairs */}
+
               <div className="space-y-6">
                   <div className="flex justify-between items-center">
                     <Typography variant="p" className="font-bold">
@@ -247,9 +247,9 @@ export const CreateGameForm = ({ onCancel, onSuccess }) => {
           <div className="flex gap-4 justify-end w-full pt-4 border-t">
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button size="sm" variant="ghost" className="text-red-500 hover:text-red-600 hover:bg-red-50">
+                {/* <Button size="sm" variant="ghost" className="text-red-500 hover:text-red-600 hover:bg-red-50">
                   Discard
-                </Button>
+                </Button> */}
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
@@ -268,13 +268,13 @@ export const CreateGameForm = ({ onCancel, onSuccess }) => {
               </AlertDialogContent>
             </AlertDialog>
 
-            <Button
+            {/* <Button
               size="sm"
               variant="outline"
               onClick={() => handleSubmit(false)}
             >
               <SaveIcon className="w-4 h-4 mr-2" /> Save Draft
-            </Button>
+            </Button> */}
             <Button
               disabled={pairs.length < 3} 
               size="sm"

@@ -338,7 +338,7 @@ const PlayFindTheMatch = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-300 via-yellow-200 to-orange-200 flex flex-col relative">
-      {/* Sound Toggle */}
+
       <div className="absolute top-4 right-4 z-10">
         <Button
           variant="ghost"
