@@ -1,6 +1,6 @@
 # Find The Match - Memory Puzzle Game
 
-**Vercel Deployment:** [Link to be announced (TBA)]
+**Vercel Deployment:** https://find-the-match-one.vercel.app/
 
 ## Overview
 
